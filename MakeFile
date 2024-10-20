@@ -1,0 +1,29 @@
+# Define the compiler
+CC = gcc
+
+# Define the compiler flags
+CFLAGS = -Wall -g
+
+# Define the target executable
+TARGET = main
+
+# Define source files
+SRCS = main.c linkedlist.c
+
+# Define header files
+HEADERS = linked_list.h
+
+# Define object files (these will be created after compilation)
+OBJS = $(SRCS:.c=.o)
+
+# Rule to compile the executable
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+
+# Rule to compile the object files
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean the build (remove object files and executable)
+clean:
+	rm -f $(OBJS) $(TARGET)
